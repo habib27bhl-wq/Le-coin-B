@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Le Coin B – Sandwich, Burger à Mostaganem</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Cairo:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff7ee;--card:#fff;--ink:#1b1410;--mute:#6b5b4e;--line:#e8d7c6;--acc:#d9480f;--on:#fff;--hi:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e0e0f;--card:#19191b;--ink:#f6f1ea;--mute:#a79c91;--line:#2d2d30;--acc:#ff7a1a;--on:#14110e}}
+:root[data-theme="dark"]{--bg:#0e0e0f;--card:#19191b;--ink:#f6f1ea;--mute:#a79c91;--line:#2d2d30;--acc:#ff7a1a;--on:#14110e}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+.d{font-family:Anton,Impact,"Arial Narrow",sans-serif;text-transform:uppercase;font-weight:400}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px;background:var(--bg);border-bottom:1px solid var(--line)}
+.logo{font-size:26px;line-height:1;letter-spacing:.5px;text-decoration:none;color:var(--ink)}
+.logo b,.hero h1 b{color:var(--acc);font-weight:400}
+.btn{display:inline-block;padding:10px 20px;border-radius:6px;background:var(--acc);color:var(--on);font-weight:700;text-decoration:none;transform:skew(-6deg)}
+.btn.o{background:none;color:var(--hi);border:2px solid var(--hi)}
+.hr{display:flex;align-items:center;gap:10px}.ig{display:grid;place-items:center;width:40px;height:40px;border:2px solid var(--acc);border-radius:8px;color:var(--acc)}
+.hero{min-height:min(80vh,640px);display:flex;flex-direction:column;justify-content:flex-end;padding:24px 16px 32px;color:var(--hi);background:linear-gradient(180deg,rgba(0,0,0,.3),rgba(0,0,0,.88)),#111}
+.hero h1{margin:0;font-size:clamp(64px,19vw,150px);line-height:.92;transform:rotate(-2deg);transform-origin:left}
+.hero .sub{display:inline-block;align-self:flex-start;margin:10px 0 0;padding:4px 16px;background:var(--acc);color:var(--on);font-size:20px;letter-spacing:1px}
+.hero p{margin:14px 0 0;font-size:1.15rem}
+.ar{font-family:Cairo,system-ui,sans-serif;font-weight:700;font-size:1.6rem;color:var(--acc)}
+.cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:20px}
+.feat{display:flex;flex-wrap:wrap;gap:6px 28px;justify-content:center;padding:14px 16px;background:var(--acc);color:var(--on);font-weight:700}
+#nav{display:flex;gap:8px;overflow-x:auto;padding:14px 16px;max-width:1000px;margin:0 auto}
+#nav a{flex:none;padding:6px 16px;border:1px solid var(--line);border-radius:999px;color:var(--ink);text-decoration:none;font-weight:600;background:var(--card)}
+main{max-width:1000px;margin:0 auto;padding:0 16px 32px}
+section{margin-top:30px}
+h2{display:inline-block;margin:0 0 14px;padding:5px 24px 2px;background:var(--acc);color:var(--on);font-size:28px;line-height:1.2;clip-path:polygon(0 10%,4% 0,100% 8%,96% 100%,2% 92%)}
+.g{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+.it{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:flex;gap:12px;align-items:flex-start}
+.tx{flex:1;min-width:0}.rw{display:flex;justify-content:space-between;gap:8px;align-items:baseline}.hd{display:flex;gap:12px;align-items:flex-start}
+.ph{flex:none;width:84px;height:84px;object-fit:cover;border-radius:8px;background:#111}.p .ph{border-radius:50%}
+.it.p{display:block}
+.it h3{margin:0;font-size:19px;line-height:1.2;letter-spacing:.3px}
+.it p{margin:3px 0 0;color:var(--mute);font-size:.9rem}
+.pr{color:var(--acc);font-weight:700;font-size:1.15rem;line-height:1.2;white-space:nowrap}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px;text-align:center}
+.sz span{border:1px solid var(--line);border-radius:6px;padding:4px 2px;font-weight:700;font-size:.95rem}
+.sz small{display:block;color:var(--mute);font-size:.72rem;font-weight:600}
+.note{grid-column:1/-1;margin:0}
+footer{background:var(--card);border-top:1px solid var(--line);padding:32px 16px;text-align:center}
+footer h2{margin-bottom:10px}
+footer p{margin:6px 0}
+footer a{color:var(--acc);font-weight:700}
+a:focus-visible,.btn:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+</style>
+</head>
+<body>
+<header>
+<a class="logo d" href="#top">Le Coin <b>B</b></a>
+<div class="hr"><a id="ig" class="ig" href="https://www.instagram.com/lecoinb27_/" target="_blank" rel="noopener" aria-label="Instagram @lecoinb27_"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+<a class="btn" href="tel:+213560041700" target="_blank" rel="noopener">Appeler</a></div>
+</header>
+<div class="hero" id="top">
+<h1 class="d">Le Coin <b>B</b></h1>
+<span class="sub d">Sandwich - Burger</span>
+<p><span class="ar" lang="ar" dir="rtl">الطعم اللي يخليك ترجع!</span></p>
+<p>Good Food, Good Mood. Sandwichs, burgers, pizzas et tacos à Mostaganem.</p>
+<div class="cta"><a class="btn" href="#menu">Voir le menu</a><a id="t1" class="btn o" href="tel:+213560041700" target="_blank" rel="noopener">05 60 04 17 00</a></div>
+</div>
+<div class="feat"><span>Goût irrésistible</span><span>Ingrédients frais</span><span>Service rapide</span></div>
+<nav id="nav" aria-label="Catégories du menu"></nav>
+<main id="menu"></main>
+<footer id="contact">
+<h2 class="d">Nous trouver</h2>
+<p id="ad">Rue Bensikadour Mohamed, Mostaganem</p>
+<p><a id="t2" href="tel:+213560041700" target="_blank" rel="noopener">05.60.04.17.00</a></p>
+<p><a id="mp" href="https://www.google.com/maps/search/?api=1&amp;query=W3JP%2B76V+Coin+B%2C+Rue+Bensikadour+Mohamed%2C+Mostaganem" target="_blank" rel="noopener">Ouvrir dans Google Maps</a></p>
+<p class="ar" lang="ar" dir="rtl">جودة، ذوق، إرضاء الزبائن</p>
+<p style="color:var(--mute)">Le goût avant tout&nbsp;! Prix en dinars algériens (DA).</p>
+</footer>
+<script src="config.js"></script>
+<script src="data.js"></script>
+<script>
+const SZ=["M","L","XL"],$=i=>document.getElementById(i),E=s=>String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
+let D=DEF;
+const sizes=a=>`<div class="sz">${a.map((v,i)=>`<span><small>${SZ[i]}</small>${v}&nbsp;DA</span>`).join("")}</div>`;
+const im=x=>x.i?`<img class="ph" src="${x.i}" alt="${E(x.n)}" width="84" height="84" loading="lazy">`:"";
+const L=a=>a.map(x=>`<div class="it">${im(x)}<div class="tx"><div class="rw"><h3 class="d">${E(x.n)}</h3>${x.p[0]?`<span class="pr">${x.p[0]}&nbsp;DA</span>`:""}</div>${x.d?`<p>${E(x.d)}</p>`:""}</div></div>`).join("");
+const PZ=a=>a.map(x=>`<div class="it p"><div class="hd">${im(x)}<div class="tx"><h3 class="d">${E(x.n)}</h3><p>${E(x.d)}</p></div></div>${sizes(x.p)}</div>`).join("");
+function render(){
+const S=[["pizza","Pizza",PZ(D.pizza)],["sandwichs","Sandwichs",L(D.sand)],["burgers","Burgers",L(D.bur)],["tacos","Tacos",L(D.tac)+`<div class="it p note"><h3 class="d">Tailles</h3>${sizes(D.tl)}</div>`],["crousty","Crousty",L(D.cro)],["boissons","Boissons",L(D.boi)],["supp","Suppléments",`<div class="it p note"><p style="margin:0">${E(D.sup)}</p></div>`]];
+$("menu").innerHTML=S.map(([i,t,h])=>`<section id="${i}"><h2 class="d">${t}</h2><div class="g">${h}</div></section>`).join("");
+$("nav").innerHTML=S.map(([i,t])=>`<a href="#${i}">${t}</a>`).join("");
+const f=D.tel.replace(/\D/g,"");
+document.querySelectorAll('a[href^="tel:"]').forEach(a=>a.href="tel:+213"+f.slice(1));
+$("t1").textContent=f.replace(/(\d\d)(?=\d)/g,"$1 ");$("t2").textContent=f.replace(/(\d\d)(?=\d)/g,"$1.");
+$("ad").textContent=D.addr;
+$("mp").href="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(D.map);
+$("ig").href="https://www.instagram.com/"+D.ig+"/";
+}
+$("top").style.background=`linear-gradient(180deg,rgba(0,0,0,.3),rgba(0,0,0,.88)),url(${HERO}) center/cover #111`;
+render();
+if(CFG.projectId)fetch(`https://firestore.googleapis.com/v1/projects/${CFG.projectId}/databases/(default)/documents/site/menu`).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.fields&&j.fields.json){D=JSON.parse(j.fields.json.stringValue);render()}}).catch(()=>{});
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin – Le Coin B</title>
+<style>
+body{margin:0;font:16px/1.4 system-ui,sans-serif;background:#0e0e0f;color:#f6f1ea;padding:12px 12px 90px}
+h1,h2{font-family:Impact,sans-serif;text-transform:uppercase;font-weight:400;margin:18px 0 8px}h2{color:#ff7a1a}
+input,textarea,button{font:inherit;padding:10px;border-radius:8px;border:1px solid #333;background:#19191b;color:inherit;width:100%;box-sizing:border-box}
+button{background:#ff7a1a;color:#14110e;font-weight:700;border:0;cursor:pointer;width:auto;padding:10px 16px}
+.c{background:#19191b;border:1px solid #2d2d30;border-radius:10px;padding:10px;margin:8px 0;display:grid;gap:6px}
+.r{display:flex;gap:6px;align-items:center}.r>*{flex:1;min-width:0}.r>img{flex:none}
+img{width:64px;height:64px;object-fit:cover;border-radius:8px;background:#111}
+.b2{background:#333;color:#fff}.x{background:#b3261e;color:#fff}
+#bar{position:fixed;left:0;right:0;bottom:0;padding:10px 12px;background:#0e0e0f;border-top:1px solid #333;display:flex;gap:12px;align-items:center}
+label{font-size:.8rem;color:#a79c91}
+</style></head><body>
+<h1>Admin Le Coin B</h1>
+<div id="lg" class="c"><input id="em" type="email" placeholder="Email" autocomplete="username"><input id="pw" type="password" placeholder="Mot de passe" autocomplete="current-password"><button id="go">Se connecter</button><span id="ms"></span></div>
+<div id="ed" hidden></div>
+<div id="bar" hidden><button id="sv">Enregistrer</button><span id="st"></span></div>
+<script src="config.js"></script>
+<script src="data.js"></script>
+<script>
+const $=i=>document.getElementById(i),E=s=>String(s).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;");
+const F=`https://firestore.googleapis.com/v1/projects/${CFG.projectId}/databases/(default)/documents/site/menu`;
+const CT=[["pizza","Pizza",3],["sand","Sandwichs",1],["bur","Burgers",1],["tac","Tacos",1],["cro","Crousty",1],["boi","Boissons",1]];
+let D,tok;
+if(!CFG.apiKey||!CFG.projectId)$("ms").textContent="Remplis d’abord config.js (apiKey, projectId).";
+$("go").onclick=async()=>{
+$("ms").textContent="…";
+const r=await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${CFG.apiKey}`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:$("em").value,password:$("pw").value,returnSecureToken:true})});
+const j=await r.json();
+if(!r.ok){$("ms").textContent="Email ou mot de passe incorrect";return}
+tok=j.idToken;D=JSON.parse(JSON.stringify(DEF));
+try{const g=await fetch(F);if(g.ok){const x=await g.json();D=JSON.parse(x.fields.json.stringValue)}}catch(_){}
+$("lg").hidden=true;$("ed").hidden=false;$("bar").hidden=false;draw();
+};
+function draw(){
+let h=`<h2>Contact</h2><div class="c"><label>Téléphone (ex. 0560041700)</label><input data-k="tel" value="${E(D.tel)}"><label>Adresse</label><input data-k="addr" value="${E(D.addr)}"><label>Recherche Google Maps</label><input data-k="map" value="${E(D.map)}"><label>Instagram (sans @)</label><input data-k="ig" value="${E(D.ig)}"></div>`;
+for(const [k,t,n] of CT){h+=`<h2>${t}</h2>`+D[k].map((x,i)=>`<div class="c" data-c="${k}" data-i="${i}"><div class="r">${x.i?`<img src="${x.i}">`:"<img>"}<input type="file" accept="image/*" data-f></div><input data-f2="n" value="${E(x.n)}" placeholder="Nom"><textarea data-f2="d" rows="2" placeholder="Description">${E(x.d)}</textarea><div class="r">${x.p.map((v,j)=>`<input type="number" data-p="${j}" value="${v}" placeholder="${n>1?["M","L","XL"][j]:"Prix DA"}">`).join("")}</div><button class="x" data-del>Supprimer</button></div>`).join("")+`<button class="b2" data-add="${k}">+ Ajouter</button>`}
+h+=`<h2>Tailles tacos (M / L / XL)</h2><div class="c"><div class="r">${D.tl.map((v,j)=>`<input type="number" data-tl="${j}" value="${v}">`).join("")}</div></div><h2>Suppléments</h2><div class="c"><textarea data-k="sup" rows="4">${E(D.sup)}</textarea></div>`;
+$("ed").innerHTML=h;
+}
+const shrink=f=>new Promise(r=>{const im=new Image();im.onload=()=>{const s=Math.min(im.width,im.height),cv=document.createElement("canvas");cv.width=cv.height=176;cv.getContext("2d").drawImage(im,(im.width-s)/2,(im.height-s)/2,s,s,0,0,176,176);r(cv.toDataURL("image/jpeg",.75))};im.src=URL.createObjectURL(f)});
+$("ed").oninput=ev=>{const t=ev.target,c=t.closest("[data-c]");
+if(t.dataset.k)D[t.dataset.k]=t.value;
+else if(t.dataset.tl)D.tl[t.dataset.tl]=+t.value;
+else if(c){const x=D[c.dataset.c][c.dataset.i];if(t.dataset.f2)x[t.dataset.f2]=t.value;else if(t.dataset.p)x.p[t.dataset.p]=+t.value}};
+$("ed").onchange=async ev=>{const t=ev.target;if(!("f" in t.dataset)||!t.files[0])return;const c=t.closest("[data-c]"),x=D[c.dataset.c][c.dataset.i];x.i=await shrink(t.files[0]);c.querySelector("img").src=x.i};
+$("ed").onclick=ev=>{const t=ev.target,c=t.closest("[data-c]");
+if("del" in t.dataset&&c&&confirm("Supprimer ?")){D[c.dataset.c].splice(+c.dataset.i,1);draw()}
+if(t.dataset.add){const k=t.dataset.add,n=CT.find(a=>a[0]==k)[2];D[k].push({n:"Nouveau",d:"",p:Array(n).fill(0),i:""});draw()}};
+$("sv").onclick=async()=>{$("st").textContent="…";
+const r=await fetch(F+"?updateMask.fieldPaths=json",{method:"PATCH",headers:{Authorization:"Bearer "+tok,"Content-Type":"application/json"},body:JSON.stringify({fields:{json:{stringValue:JSON.stringify(D)}}})});
+$("st").textContent=r.ok?"Enregistré ✓":"Erreur "+r.status+" (reconnecte-toi)"};
+</script></body></html>
